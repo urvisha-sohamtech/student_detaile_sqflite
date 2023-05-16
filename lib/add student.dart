@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_detaile_sqflite/database.dart';
 
 class AddStudent extends StatefulWidget {
 
@@ -89,7 +90,7 @@ class _AddStudentState extends State<AddStudent> {
                       primary: Colors.white,
                       textStyle: TextStyle(fontSize: 15)
                     ),
-                      onPressed: (){},
+                      onPressed: (){Navigator.pop(context);},
                       child: Text('Add Detail'),
                   ),
                 ],
