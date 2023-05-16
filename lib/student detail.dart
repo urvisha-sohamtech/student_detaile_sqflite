@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_detaile_sqflite/add%20student.dart';
 import 'package:student_detaile_sqflite/student list.dart';
 class Homepage extends StatefulWidget {
 
@@ -10,8 +11,8 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add student'),
-      backgroundColor: Colors.black54,
+      appBar: AppBar(title: Text('Student detail'),
+      backgroundColor: Colors.black45,
         centerTitle: true,
       ),
       body: ListView(
@@ -23,9 +24,8 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          setState(() {
-            List(id: '1',Name: 'urvisha',Dob: '12/3/2003',Email: 'hfhej',Mobile: '236543634');
-          });
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context)=>AddStudent()));
         },
         child: Icon(Icons.add,),backgroundColor: Colors.black,
       ),

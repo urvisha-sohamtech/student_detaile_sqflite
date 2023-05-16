@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class List extends StatelessWidget {
@@ -13,7 +12,6 @@ List({required this.id,required this.Name,required this.Dob,required this.Email,
   Widget build(BuildContext context) {
     return Dismissible(
       key: UniqueKey(),
-      // direction: DismissDirection.endToStart,
       background: Container(
         child: IconButton(onPressed:(){}, icon: Icon(Icons.edit))
       ),
@@ -22,7 +20,7 @@ List({required this.id,required this.Name,required this.Dob,required this.Email,
       ),
       child: Card(
         child: Container(
-          color: Colors.black87,
+          color: Colors.white,
           height: 150,
           width: double.infinity,
           padding: EdgeInsets.only(top: 10,bottom:10,left: 20,right: 10),
@@ -33,35 +31,35 @@ List({required this.id,required this.Name,required this.Dob,required this.Email,
                 '$id',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white
+                  color: Colors.black,
                 ),
               ),
               Text(
                 '$Name',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               Text(
                 '$Dob',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               Text(
                 '$Email',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               Text(
                 '$Mobile',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               )
             ],
