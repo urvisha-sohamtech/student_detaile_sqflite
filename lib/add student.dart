@@ -47,6 +47,7 @@ class _AddStudentState extends State<AddStudent> {
       mobilecontroller.text = "";
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,8 +135,11 @@ class _AddStudentState extends State<AddStudent> {
                       textStyle: TextStyle(fontSize: 15)
                     ),
                     child: Text('Add Detail'),
-                      onPressed: () async {
+                      onPressed: ()  {
                         if (formKey.currentState!.validate()){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                             SnackBar(content: Text('Processing Data')),
+                          );
                           addItem();
                           // updateItem();
                       setState(() {
