@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_detaile_sqflite/database.dart';
+import 'database.dart';
 
 class AddStudent extends StatefulWidget {
 
@@ -8,7 +8,45 @@ class AddStudent extends StatefulWidget {
 }
 
 class _AddStudentState extends State<AddStudent> {
+  final TextEditingController idcontroller = TextEditingController();
+  final TextEditingController namecontroller = TextEditingController();
+  final TextEditingController dobcontroller = TextEditingController();
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController mobilecontroller = TextEditingController();
 
+  List<Map<String, dynamic>> myData = [];
+
+  final formKey = GlobalKey<FormState>();
+  String? formValidator(String value) {
+    if (value.isEmpty) return 'Field is Required';
+    return null;
+  }
+
+  Future<void> addItem() async {
+    DatabaseHelper.createItem(
+        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text,mobilecontroller.text);
+  }
+  Future<void> updateItem() async {
+    await DatabaseHelper.updateItem(
+        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+  }
+
+  void showMyForm (int?id)async {
+    if(id != null){
+      final existingData = myData.firstWhere((element) => element['id']==id);
+      idcontroller.text = existingData ['id'];
+      namecontroller.text = existingData ['name'];
+      dobcontroller.text = existingData ['dob'];
+      emailcontroller.text = existingData ['email'];
+      mobilecontroller.text = existingData ['mobile'];
+    }else {
+      idcontroller.text ="";
+      namecontroller.text = "";
+      dobcontroller.text = "";
+      emailcontroller.text ="";
+      mobilecontroller.text = "";
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +71,7 @@ class _AddStudentState extends State<AddStudent> {
                 height: 20,
               ),
               TextField(
+                controller: idcontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter ID',
@@ -43,6 +82,7 @@ class _AddStudentState extends State<AddStudent> {
                 height: 10,
               ),
               TextField(
+                controller: namecontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Name',
@@ -53,6 +93,7 @@ class _AddStudentState extends State<AddStudent> {
                 height: 10,
               ),
               TextField(
+                controller: dobcontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Dob',
@@ -63,6 +104,7 @@ class _AddStudentState extends State<AddStudent> {
                 height: 10,
               ),
               TextField(
+                controller: emailcontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Email',
@@ -73,6 +115,7 @@ class _AddStudentState extends State<AddStudent> {
                 height: 10,
               ),
               TextField(
+                controller: mobilecontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter No',
@@ -90,16 +133,32 @@ class _AddStudentState extends State<AddStudent> {
                       primary: Colors.white,
                       textStyle: TextStyle(fontSize: 15)
                     ),
-                      onPressed: (){Navigator.pop(context);},
-                      child: Text('Add Detail'),
+                    child: Text('Add Detail'),
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()){
+                          addItem();
+                          // updateItem();
+                      setState(() {
+                        idcontroller.text= '';
+                        namecontroller.text = '';
+                        dobcontroller.text = '';
+                        emailcontroller.text = '';
+                        mobilecontroller.text = '';
+                      });
+                        Navigator.pop(context);
+                        }
+                      },
                   ),
                 ],
               )
             ],
           ),
         ),
-      )
-
+      ),
     );
   }
 }
+
+
+
+

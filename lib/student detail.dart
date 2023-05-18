@@ -8,6 +8,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  var myData = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,13 +16,23 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          List(id: '1',Name: 'urvisha',Dob: '12/3/2003',Email: 'hfhej',Mobile: '236543634'),
-          List(id: '2',Name: 'vdfdv',Dob: '2/5/2003',Email: 'j@gmail.com',Mobile: '236543634'),
-          List(id: '3',Name: 'dsc',Dob: '17/3/1003',Email: 'njb@gamil.com',Mobile: '236543634'),
-        ],
-      ),
+      body:myData.isEmpty? Center(child: Text('no data'),)
+          : ListView.builder(
+          itemCount: myData.length,
+          itemBuilder: (context,index){
+      return Dismissible(
+        key: UniqueKey(),
+        background: Icon(Icons.edit),
+        secondaryBackground: Icon(Icons.delete),
+        child: Card(
+          color: Colors.lightBlue,
+          margin: EdgeInsets.all(15),
+          child: ListTile(
+            title: Text(myData[index]['id''name''dob''email''mobile'],)
+          ),
+        ),
+      );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(context,
