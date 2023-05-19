@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_detaile_sqflite/add%20student.dart';
-import 'package:student_detaile_sqflite/student list.dart';
+
 class Homepage extends StatefulWidget {
 
   @override
@@ -9,6 +9,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   var myData = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,19 +17,19 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body:myData.isEmpty? Center(child: Text('no data'),)
+      body:myData.isEmpty? Center(child: Text(''),)
           : ListView.builder(
           itemCount: myData.length,
           itemBuilder: (context,index){
-      return Dismissible(
-        key: UniqueKey(),
-        background: Icon(Icons.edit),
-        secondaryBackground: Icon(Icons.delete),
-        child: Card(
-          color: Colors.lightBlue,
-          margin: EdgeInsets.all(15),
-          child: ListTile(
-            title: Text(myData[index]['id''name''dob''email''mobile'],)
+            return Dismissible(
+             key: UniqueKey(),
+             background: Icon(Icons.edit),
+             secondaryBackground: Icon(Icons.delete),
+              child: Card(
+               color: Colors.lightBlue,
+                margin: EdgeInsets.all(15),
+                child: ListTile(
+                title: Text(myData[index]['id''name''dob''email''mobile'],)
           ),
         ),
       );

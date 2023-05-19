@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
+
   static Future<Database> db(){
     return openDatabase(
       'flutter.db',
@@ -14,44 +15,45 @@ class DatabaseHelper {
   static Future<void> createTable(Database database) async {
     await database.execute(""" CREATE TABLE items(
         id INTEGER PRIMARY KEY,
+        stuid TEXT,
         name TEXT,
         dob TEXT,
         email TEXT,
         mobile INTEGER,
-        // createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         )
         """);
   }
 
-  static Future<int> createItem(String?id, String?name, String?dob, String?email, String?moblie)async{
+  static Future<int> createItem(
+      String?stuid, String?name, String?dob, String?email, String?mobile)async{
     final db = await DatabaseHelper.db();
-    final data = {'id':id, 'name':name, 'dob':dob, 'email': email, 'mobile': moblie};
-    final idno =  db.insert('items', data,
+    final data = {'id':stuid, 'name':name, 'dob':dob, 'email': email, 'mobile': mobile};
+    final id =  db.insert('items', data,
      conflictAlgorithm: ConflictAlgorithm.replace);
-    return idno;
+    return id;
   }
 
-   static Future<List<Map<String,dynamic>>> getItems() async{
+   static Future<List> getItems() async{
     final db  = await DatabaseHelper.db();
-    return db.query('items',orderBy: "id");
+    return db.query('items');
    }
 
-  static Future<List<Map<String,dynamic>>> getItem(int id) async{
+  static Future<List> getItem(int id) async{
     final db = await DatabaseHelper.db();
     return db.query('items',where: "id = ?",whereArgs: [id],limit: 1);
   }
 
   static Future<int> updateItem(
-      String id,String name, String dob, String email, String mobile,)async{
+      String stuid,String name, String dob, String email, String mobile,)async{
     final db = await DatabaseHelper.db();
     final data = {
-      'id': id,
+      'id': stuid,
       'name': name,
       'dob': dob,
       'email':email,
       'mobile': mobile,
     };
-    final result= await db.update('items', data,where: "id =?",whereArgs: [id]);
+    final result= db.update('detail', data);
     return result;
   }
 }
