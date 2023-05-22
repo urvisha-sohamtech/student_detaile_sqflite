@@ -1,4 +1,5 @@
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqflite.dart' ;
+// import 'package:sqflite/sql.dart';
 
 class DatabaseHelper {
 
@@ -13,47 +14,37 @@ class DatabaseHelper {
   }
 
   static Future<void> createTable(Database database) async {
-    await database.execute(""" CREATE TABLE items(
+    await database.execute(""" CREATE TABLE items("
         id INTEGER PRIMARY KEY,
-        stuid TEXT,
         name TEXT,
         dob TEXT,
         email TEXT,
         mobile INTEGER,
-        )
+        " )
         """);
   }
 
-  static Future<int> createItem(
-      String?stuid, String?name, String?dob, String?email, String?mobile)async{
+  static Future<int> createItem( id, name, dob, email, mobile)async{
     final db = await DatabaseHelper.db();
-    final data = {'id':stuid, 'name':name, 'dob':dob, 'email': email, 'mobile': mobile};
-    final id =  db.insert('items', data,
-     conflictAlgorithm: ConflictAlgorithm.replace);
-    return id;
+    final data = {'id':id, 'name':name, 'dob':dob, 'email': email, 'mobile': mobile};
+    final result =  db.insert('items', data);
+    return result;
   }
 
-   static Future<List> getItems() async{
-    final db  = await DatabaseHelper.db();
-    return db.query('items');
-   }
+  //  static Future<List> getItems() async{
+  //   final db  = await DatabaseHelper.db();
+  //   return db.query('items');
+  //  }
+  //
+  // static Future<List> getItem(int id) async{
+  //   final db = await DatabaseHelper.db();
+  //   return db.query('items',where: "id = ?",whereArgs: [id],limit: 1);
+  // }
 
-  static Future<List> getItem(int id) async{
+  static Future<int> updateItem( id,name,dob,email,mobile)async{
     final db = await DatabaseHelper.db();
-    return db.query('items',where: "id = ?",whereArgs: [id],limit: 1);
-  }
-
-  static Future<int> updateItem(
-      String stuid,String name, String dob, String email, String mobile,)async{
-    final db = await DatabaseHelper.db();
-    final data = {
-      'id': stuid,
-      'name': name,
-      'dob': dob,
-      'email':email,
-      'mobile': mobile,
-    };
-    final result= db.update('detail', data);
+    final data = {'id': id,'name': name,'dob': dob,'email':email,'mobile': mobile,};
+    final result= db.update('items', data,where: "id = ?", whereArgs: [id]);
     return result;
   }
 }

@@ -8,7 +8,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  var myData = [];
+   final myData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +22,18 @@ class _HomepageState extends State<Homepage> {
           itemCount: myData.length,
           itemBuilder: (context,index){
             return Dismissible(
-             key: UniqueKey(),
-             background: Icon(Icons.edit),
-             secondaryBackground: Icon(Icons.delete),
+              key: UniqueKey(),
+              background: Icon(Icons.edit),
+              secondaryBackground: Icon(Icons.delete),
               child: Card(
-               color: Colors.lightBlue,
+                color: Colors.lightBlue,
                 margin: EdgeInsets.all(15),
                 child: ListTile(
-                title: Text(myData[index]['id''name''dob''email''mobile'],)
-          ),
-        ),
-      );
-      }),
+                    title: Text('id')
+                ),
+              ),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(context,

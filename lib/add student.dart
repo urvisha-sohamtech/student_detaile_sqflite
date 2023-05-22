@@ -15,14 +15,22 @@ class _AddStudentState extends State<AddStudent> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController mobilecontroller = TextEditingController();
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool iseditmode = true;
+  // bool validatename = false;
+  // bool validatedob = false;
+  // bool validateemail = false;
+  // bool validatemobile = false;
 
-  Future<void> addItem() async {
-       DatabaseHelper.createItem(
-        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
-  }
+  final formKey = GlobalKey<FormState>();
+   // late bool isEditMode;
+  // Future<void> addItem() async {
+  //      DatabaseHelper.createItem(
+  //       idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+  // }
+  // List<Map<String, dynamic>> myData = [];
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Add Student'),
@@ -111,10 +119,14 @@ class _AddStudentState extends State<AddStudent> {
                         textStyle: TextStyle(fontSize: 15)
                       ),
                       child: Text('Add Detail'),
-                        onPressed: ()  {
-                             DatabaseHelper.createItem(
-                                 idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
-                             Navigator.pop(context);
+                        onPressed: () {
+                         if(iseditmode){
+                           DatabaseHelper.createItem(idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+                           Navigator.pop(context);
+                         }else{
+                           DatabaseHelper.updateItem(idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+                           Navigator.pop(context);
+                         }
                         },
                     ),
                   ],
@@ -127,6 +139,7 @@ class _AddStudentState extends State<AddStudent> {
     );
   }
 }
+
 
 
 
