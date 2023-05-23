@@ -15,12 +15,6 @@ class _AddStudentState extends State<AddStudent> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController mobilecontroller = TextEditingController();
 
-  bool iseditmode = true;
-  // bool validatename = false;
-  // bool validatedob = false;
-  // bool validateemail = false;
-  // bool validatemobile = false;
-
   final formKey = GlobalKey<FormState>();
    // late bool isEditMode;
   // Future<void> addItem() async {
@@ -28,6 +22,11 @@ class _AddStudentState extends State<AddStudent> {
   //       idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
   // }
   // List<Map<String, dynamic>> myData = [];
+
+  Future<void> additem() async{
+    DatabaseHelper.createItem(
+        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+  }
 
   @override
 
@@ -120,13 +119,17 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                       child: Text('Add Detail'),
                         onPressed: () {
-                         if(iseditmode){
-                           DatabaseHelper.createItem(idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
-                           Navigator.pop(context);
-                         }else{
-                           DatabaseHelper.updateItem(idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
-                           Navigator.pop(context);
-                         }
+                      if(formKey.currentState!.validate()){
+                        additem();
+                      }
+                      setState(() {
+                        idcontroller.text = '';
+                        namecontroller.text = '';
+                        dobcontroller.text = '';
+                        emailcontroller.text = '';
+                        mobilecontroller.text ='';
+                      });
+                      Navigator.pop(context);
                         },
                     ),
                   ],

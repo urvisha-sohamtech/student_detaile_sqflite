@@ -29,7 +29,9 @@ class _HomepageState extends State<Homepage> {
                 color: Colors.lightBlue,
                 margin: EdgeInsets.all(15),
                 child: ListTile(
-                    title: Text('id')
+                    title: Text(myData[index]['id']),
+                  subtitle: Text(myData[index]['name']),
+                  textColor: Colors.black,
                 ),
               ),
             );
