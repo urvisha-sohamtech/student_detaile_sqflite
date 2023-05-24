@@ -1,32 +1,31 @@
-import 'package:sqflite/sqflite.dart' as sql;
-import 'package:sqflite/sql.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
 
-  static Future<sql.Database> db(){
-    return sql.openDatabase(
+  static Future<Database> db(){
+    return openDatabase(
       'flutter.db',
       version: 1,
-      onCreate: (sql.Database database, int version) {
+      onCreate: (Database database, int version) {
          createTable(database);
       },
     );
   }
 
   static Future<void> createTable(database) async {
-    await database.execute(" CREATE TABLE items("
-        "id INTEGER PRIMARY KEY,"
-        "name TEXT,"
-        "dob TEXT,"
-        "email TEXT,"
-        "mobile INTEGER,)"
-        );
+     database.execute(""" CREATE TABLE items(
+        id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL,
+        dob TEXT NOT NULL,
+        email TEXT NOT NULL,
+        mobile INTEGER NOT NULL,)
+        """);
   }
 
-  static Future<int> createItem( id, name, dob, email, mobile)async{
+  static Future<int> createItem(id, name, dob, email, mobile )async{
     final db = await DatabaseHelper.db();
-    final data = {'id':id, 'name':name, 'dob':dob, 'email': email, 'mobile': mobile};
-    final result =  db.insert('items', data);
+    final data ={'id': id,'name': name,'dob': dob,'email': email,'mobile':mobile};
+    final result =  db.insert('items',data);
     return result;
   }
 

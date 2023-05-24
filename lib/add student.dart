@@ -16,17 +16,14 @@ class _AddStudentState extends State<AddStudent> {
   final TextEditingController mobilecontroller = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-   // late bool isEditMode;
-  // Future<void> addItem() async {
-  //      DatabaseHelper.createItem(
-  //       idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
-  // }
+
   // List<Map<String, dynamic>> myData = [];
 
   Future<void> additem() async{
     DatabaseHelper.createItem(
         idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
   }
+
 
   @override
 
@@ -118,19 +115,19 @@ class _AddStudentState extends State<AddStudent> {
                         textStyle: TextStyle(fontSize: 15)
                       ),
                       child: Text('Add Detail'),
-                        onPressed: () {
-                      if(formKey.currentState!.validate()){
-                        additem();
-                      }
-                      setState(() {
-                        idcontroller.text = '';
-                        namecontroller.text = '';
-                        dobcontroller.text = '';
-                        emailcontroller.text = '';
-                        mobilecontroller.text ='';
-                      });
-                      Navigator.pop(context);
-                        },
+                        onPressed: (){
+                          if(formKey.currentState!.validate()){
+                          additem();
+                          }
+                          setState(() {
+                             idcontroller.text = '';
+                             namecontroller.text = '';
+                             dobcontroller.text = '';
+                             emailcontroller.text = '';
+                             mobilecontroller.text ='';
+                          });
+                         Navigator.pop(context);
+                         },
                     ),
                   ],
                 ),
