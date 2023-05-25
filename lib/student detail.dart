@@ -9,7 +9,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
    final myData = [];
-
+bool isLoading =true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,22 +17,17 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body:myData.isEmpty? Center(child: Text(''),)
+      body:isLoading? Center(child: CircularProgressIndicator())
           : ListView.builder(
           itemCount: myData.length,
           itemBuilder: (context,index){
-            return Dismissible(
-              key: UniqueKey(),
-              background: Icon(Icons.edit),
-              secondaryBackground: Icon(Icons.delete),
-              child: Card(
-                color: Colors.lightBlue,
-                margin: EdgeInsets.all(15),
-                child: ListTile(
-                    title: Text(myData[index]['id']),
-                  subtitle: Text(myData[index]['name']),
-                  textColor: Colors.black,
-                ),
+            return Card(
+              color: Colors.lightBlue,
+              margin: EdgeInsets.all(15),
+              child: ListTile(
+                  title: Text(myData[index]['id']),
+                subtitle: Text(myData[index]['name']),
+                textColor: Colors.black,
               ),
             );
           }),

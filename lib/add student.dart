@@ -24,7 +24,6 @@ class _AddStudentState extends State<AddStudent> {
         idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
   }
 
-
   @override
 
   Widget build(BuildContext context) {
@@ -115,18 +114,11 @@ class _AddStudentState extends State<AddStudent> {
                         textStyle: TextStyle(fontSize: 15)
                       ),
                       child: Text('Add Detail'),
-                        onPressed: (){
-                          if(formKey.currentState!.validate()){
-                          additem();
-                          }
-                          setState(() {
-                             idcontroller.text = '';
-                             namecontroller.text = '';
-                             dobcontroller.text = '';
-                             emailcontroller.text = '';
-                             mobilecontroller.text ='';
-                          });
-                         Navigator.pop(context);
+                        onPressed: ()async{
+                        if(formKey.currentState!.validate()){
+                           additem();
+                        }
+                        Navigator.pop(context);
                          },
                     ),
                   ],

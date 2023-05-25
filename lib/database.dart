@@ -15,10 +15,10 @@ class DatabaseHelper {
   static Future<void> createTable(database) async {
      database.execute(""" CREATE TABLE items(
         id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        dob TEXT NOT NULL,
-        email TEXT NOT NULL,
-        mobile INTEGER NOT NULL,)
+        name TEXT ,
+        dob TEXT
+        email TEXT ,
+        mobile INTEGER ,)
         """);
   }
 
