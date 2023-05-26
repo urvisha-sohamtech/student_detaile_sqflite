@@ -17,7 +17,8 @@ bool isLoading =true;
       backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body:isLoading? Center(child: CircularProgressIndicator())
+      body:isLoading
+          ? Center(child: CircularProgressIndicator(),)
           : ListView.builder(
           itemCount: myData.length,
           itemBuilder: (context,index){
@@ -26,7 +27,7 @@ bool isLoading =true;
               margin: EdgeInsets.all(15),
               child: ListTile(
                   title: Text(myData[index]['id']),
-                subtitle: Text(myData[index]['name']),
+                subtitle: Text(myData[index]['name,dob,email,mobile']),
                 textColor: Colors.black,
               ),
             );

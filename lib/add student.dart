@@ -17,15 +17,12 @@ class _AddStudentState extends State<AddStudent> {
 
   final formKey = GlobalKey<FormState>();
 
-  // List<Map<String, dynamic>> myData = [];
-
-  Future<void> additem() async{
-    DatabaseHelper.createItem(
+  Future<void> addDetail() async{
+    DatabaseHelper.insertItem(
         idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
   }
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Add Student'),
@@ -114,11 +111,10 @@ class _AddStudentState extends State<AddStudent> {
                         textStyle: TextStyle(fontSize: 15)
                       ),
                       child: Text('Add Detail'),
-                        onPressed: ()async{
-                        if(formKey.currentState!.validate()){
-                           additem();
-                        }
+                        onPressed: (){
+                        addDetail();
                         Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('New Student Add')));
                          },
                     ),
                   ],
