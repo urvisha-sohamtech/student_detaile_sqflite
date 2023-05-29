@@ -22,13 +22,18 @@ bool isLoading =true;
           : ListView.builder(
           itemCount: myData.length,
           itemBuilder: (context,index){
-            return Card(
-              color: Colors.teal,
-              margin: EdgeInsets.all(15),
-              child: ListTile(
-                  title: Text(myData[index]['id']),
-                subtitle: Text(myData[index]['name']),
-                textColor: Colors.black,
+            return Dismissible(
+              key: UniqueKey(),
+              background:Container(child: Icon(Icons.delete,),),
+              secondaryBackground: Container(child: Icon(Icons.edit),),
+              child: Card(
+                color: Colors.teal,
+                margin: EdgeInsets.all(15),
+                child: ListTile(
+                    title: Text(myData[index]['id']),
+                  subtitle: Text(myData[index]['name']),
+                  textColor: Colors.black,
+                ),
               ),
             );
           }),

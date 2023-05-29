@@ -16,8 +16,30 @@ class _AddStudentState extends State<AddStudent> {
   final TextEditingController mobilecontroller = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+  List<Map<String, dynamic>> myData = [];
+  bool isLoading =true;
+  get id => null;
 
+  void refreshData() async{
+    final data = await DatabaseHelper.getItems();
+    setState(() {
+      myData = data;
+      isLoading = false;
+    });
+  }
+// id == null -> create new item
+// id != null -> update an existing item
+  @override
+  void initState() {
+    super.initState();
+    refreshData();
+  }
 
+  Future<void> addItem() async {
+    await DatabaseHelper.insertItem(
+        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+    refreshData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +92,7 @@ class _AddStudentState extends State<AddStudent> {
                   decoration:const  InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter Dob',
-                    labelText: 'Dob',
+                    labelText: 'Date Of Birth',
                   ),
                 ),
                 const SizedBox(
@@ -109,12 +131,12 @@ class _AddStudentState extends State<AddStudent> {
                       child: Text('Add Detail'),
                         onPressed: (){
                         if(formKey.currentState!.validate()) {
-                          DatabaseHelper.insertItem(
-                              idcontroller.text, namecontroller.text, dobcontroller.text,
-                              emailcontroller.text, mobilecontroller.text);
+                          if(id == null){
+                            addItem();
+                          }
                           Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('New Student Add')));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('New Student Add')));
                         };
                          },
                     ),

@@ -53,7 +53,7 @@ Student({required this.id,required this.name,required this.dob,required this.ema
                 fontSize: 20,
                 color: Colors.black,
               ),
-            )
+            ),
           ],
         ),
       ),

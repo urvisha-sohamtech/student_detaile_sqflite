@@ -35,6 +35,11 @@ class DatabaseHelper {
     return db.query('Student',orderBy: 'id');
   }
 
+  static Future<List<Map<String,dynamic>>> getItem(int id) async{
+  final db = await DatabaseHelper.db();
+  return db.query('Student',where: "id = ?", whereArgs: [id],limit: 1);
+  }
+
   static Future<int> updateItem( id,name,dob,email,mobile)async{
     final db = await DatabaseHelper.db();
     final data = {'id': id,'name': name,'dob': dob,'email':email,'mobile': mobile,};
