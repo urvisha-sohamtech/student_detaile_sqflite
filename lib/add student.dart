@@ -17,10 +17,6 @@ class _AddStudentState extends State<AddStudent> {
 
   final formKey = GlobalKey<FormState>();
 
-  Future<void> addDetail() async{
-    DatabaseHelper.insertItem(
-        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +108,14 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                       child: Text('Add Detail'),
                         onPressed: (){
-                        addDetail();
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('New Student Add')));
+                        if(formKey.currentState!.validate()) {
+                          DatabaseHelper.insertItem(
+                              idcontroller.text, namecontroller.text, dobcontroller.text,
+                              emailcontroller.text, mobilecontroller.text);
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('New Student Add')));
+                        };
                          },
                     ),
                   ],

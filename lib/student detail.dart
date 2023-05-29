@@ -23,11 +23,11 @@ bool isLoading =true;
           itemCount: myData.length,
           itemBuilder: (context,index){
             return Card(
-              color: Colors.lightBlue,
+              color: Colors.teal,
               margin: EdgeInsets.all(15),
               child: ListTile(
                   title: Text(myData[index]['id']),
-                subtitle: Text(myData[index]['name''dob']),
+                subtitle: Text(myData[index]['name']),
                 textColor: Colors.black,
               ),
             );
