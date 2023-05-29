@@ -27,8 +27,7 @@ class _AddStudentState extends State<AddStudent> {
       isLoading = false;
     });
   }
-// id == null -> create new item
-// id != null -> update an existing item
+
   @override
   void initState() {
     super.initState();
@@ -137,7 +136,7 @@ class _AddStudentState extends State<AddStudent> {
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('New Student Add')));
-                        };
+                        }
                          },
                     ),
                   ],
