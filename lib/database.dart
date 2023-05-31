@@ -43,7 +43,7 @@ class DatabaseHelper {
   static Future<int> updateItem( id,name,dob,email,mobile)async{
     final db = await DatabaseHelper.db();
     final data = {'id': id,'name': name,'dob': dob,'email':email,'mobile': mobile,};
-    final result= db.update('Student', data);
+    final result= db.update('Student', data,where:  "id = ?",whereArgs: [id]);
     return result;
   }
 }

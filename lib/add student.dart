@@ -129,14 +129,10 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                       child: Text('Add Detail'),
                         onPressed: (){
-                        if(formKey.currentState!.validate()) {
-                          if(id == null){
-                            addItem();
-                          }
+                          addItem();
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('New Student Add')));
-                        }
                          },
                     ),
                   ],

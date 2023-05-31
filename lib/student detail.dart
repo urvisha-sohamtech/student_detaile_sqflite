@@ -24,7 +24,7 @@ bool isLoading =true;
           itemBuilder: (context,index){
             return Dismissible(
               key: UniqueKey(),
-              background:Container(child: Icon(Icons.delete,),),
+              background:Container(child: Icon(Icons.delete),),
               secondaryBackground: Container(child: Icon(Icons.edit),),
               child: Card(
                 color: Colors.teal,
