@@ -17,23 +17,18 @@ bool isLoading =true;
       backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body:isLoading
-          ? Center(child: CircularProgressIndicator(),)
+      body:myData.isEmpty
+          ? Center(child: Text('no data available'),)
           : ListView.builder(
           itemCount: myData.length,
           itemBuilder: (context,index){
-            return Dismissible(
-              key: UniqueKey(),
-              background:Container(child: Icon(Icons.delete),),
-              secondaryBackground: Container(child: Icon(Icons.edit),),
-              child: Card(
-                color: Colors.teal,
-                margin: EdgeInsets.all(15),
-                child: ListTile(
-                    title: Text(myData[index]['id']),
-                  subtitle: Text(myData[index]['name']),
-                  textColor: Colors.black,
-                ),
+            return Card(
+              color: Colors.teal,
+              margin: EdgeInsets.all(15),
+              child: ListTile(
+                  title: Text(myData[index]['id']),
+                subtitle: Text(myData[index]['name']),
+                textColor: Colors.black,
               ),
             );
           }),

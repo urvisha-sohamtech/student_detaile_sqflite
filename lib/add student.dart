@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_detaile_sqflite/student%20list.dart';
 import 'database.dart';
 
 class AddStudent extends StatefulWidget {
@@ -17,21 +18,9 @@ class _AddStudentState extends State<AddStudent> {
 
   final formKey = GlobalKey<FormState>();
   List<Map<String, dynamic>> myData = [];
-  bool isLoading =true;
-  get id => null;
 
   void refreshData() async{
     final data = await DatabaseHelper.getItems();
-    setState(() {
-      myData = data;
-      isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    refreshData();
   }
 
   Future<void> addItem() async {
@@ -39,6 +28,12 @@ class _AddStudentState extends State<AddStudent> {
         idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
     refreshData();
   }
+  Future<void> updateItem() async{
+    await DatabaseHelper.updateItem(
+        idcontroller.text, namecontroller.text, dobcontroller.text, emailcontroller.text, mobilecontroller.text);
+    refreshData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
