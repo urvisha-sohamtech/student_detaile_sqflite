@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:student_detaile_sqflite/student%20list.dart';
 import 'database.dart';
 
 class AddStudent extends StatefulWidget {
@@ -21,6 +20,9 @@ class _AddStudentState extends State<AddStudent> {
 
   void refreshData() async{
     final data = await DatabaseHelper.getItems();
+    setState(() {
+      myData = data;
+    });
   }
 
   Future<void> addItem() async {
@@ -124,7 +126,13 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                       child: Text('Add Detail'),
                         onPressed: (){
-                          addItem();
+                        DatabaseHelper.insertItem(
+                            idcontroller.text,
+                            namecontroller.text,
+                            dobcontroller.text,
+                            emailcontroller.text,
+                            mobilecontroller.text);
+                        DatabaseHelper.getItems();
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('New Student Add')));
