@@ -15,31 +15,31 @@ class _AddStudentState extends State<AddStudent> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController mobilecontroller = TextEditingController();
 
-  List<Map<String, dynamic>> myData = [];
-  bool isLoading =false;
-
+  // List<Map<String, dynamic>> myData = [];
+  // bool isLoading =false;
+  //
   // void refreshData() async{
-  //   final data = await DatabaseHelper.getItems();
-  //   setState(() {
-  //     myData = data;
-  //     isLoading = false;
-  //   });
+  //     final data = await DatabaseHelper.getItems();
+  //     setState(() {
+  //       // myData = data;
+  //       isLoading = false;
+  //     });
   // }
   // @override
   // void initState() {
   //   super.initState();
-  //   // refreshData();
+  //   refreshData();
   // }
 
   Future<void> addItem() async {
     try {
+      debugPrint('5');
       await DatabaseHelper.insertItem(
           idcontroller.text,
           namecontroller.text,
           dobcontroller.text,
           emailcontroller.text,
           mobilecontroller.text);
-      // refreshData();
     }catch( error){
       debugPrint('*** error');
     }
@@ -133,14 +133,19 @@ class _AddStudentState extends State<AddStudent> {
                     ),
                     child: Text('Add Detail'),
                       onPressed: (){
-                      setState(() {
                         try {
+                          debugPrint('6');
                           addItem();
                           DatabaseHelper.getItems();
                         }catch(error){
                           debugPrint('** error');
                         }
-                      });
+                        // try{
+                        //   debugPrint('7');
+                        //   DatabaseHelper.getItems();
+                        // }catch(error){
+                        //   debugPrint('** error');
+                        // }
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('New Student Add')));
