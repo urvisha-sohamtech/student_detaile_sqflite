@@ -17,9 +17,7 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body:myData.isEmpty
-          ? Center(child: Text('no data available'),)
-          : ListView.builder(
+      body:ListView.builder(
           itemCount: myData.length,
           itemBuilder: (context,index){
             return Card(

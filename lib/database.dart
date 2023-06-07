@@ -3,71 +3,48 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
 
-  static Future<Database> db(){
-    try {
-      debugPrint('1');
+  static Future<Database> db()async{
+      // var dbpath = getDatabasesPath();
+      // debugPrint(dbpath.toString());
       return openDatabase(
         'flutter.db',
         version: 1,
-        onCreate: (Database database, int version) {
+        onCreate: (database, version) {
           createTable(database);
         },
       );
-    }catch(error){
-      debugPrint('** error');
-      return db();
-    }
   }
+  // debugPrint('====> ERROR : ${error.toString()}');
 
   static Future<void> createTable(database) async {
-    try {
-      debugPrint('2');
       database.execute("""CREATE TABLE Student(
         id INTEGER PRIMARY KEY,
         name TEXT,
         dob TEXT,
         email TEXT,
         mobile INTEGER 
-        )
+        ) 
         """);
-    }catch(error){
-      debugPrint('** error');
-    }
     }
 
-  static Future<int> insertItem(id, name, dob, email, mobile )async{
+  static Future<void> insert({required int id,required String  name,required String dob,required String email,required int mobile})async{
     try {
-      debugPrint('3');
       final db = await DatabaseHelper.db();
       final data = {'id': id, 'name': name, 'dob': dob, 'email': email, 'mobile': mobile};
-      final result = db.insert('Student', data, conflictAlgorithm: ConflictAlgorithm.replace);
-      return result;
+      db.insert('Student', data, conflictAlgorithm: ConflictAlgorithm.replace);
     }catch(error){
-      debugPrint('** error');
-      return 0;
+      print(error);
     }
   }
 
-  static Future<Object> getItems() async{
-    try {
-      debugPrint('4');
+  static Future<List<Map<String,dynamic>>> getData() async {
       final db = await DatabaseHelper.db();
       return db.query('Student');
-    }catch(error){
-      debugPrint('** error');
-      return 0;
-    }
   }
 
-  static Future<int> updateItem( id,name,dob,email,mobile)async{
-    try {
+  static Future<void> updateItem( {required int id,required String name,required String dob,required String email,required int mobile})async{
       final db = await DatabaseHelper.db();
       final data = {'id': id, 'name': name, 'dob': dob, 'email': email, 'mobile': mobile,};
-      final result = db.update('Student', data, where: "id = ?", whereArgs: [id]);
-      return result;
-    }catch(error){
-      debugPrint('** error');
-      return 0;
-    }
+      db.update('Student', data, where: "id = ?", whereArgs: [id]);
   }
 }
