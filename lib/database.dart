@@ -37,9 +37,14 @@ class DatabaseHelper {
     }
   }
 
-  static Future<List<Map<String,dynamic>>> getData() async {
+  static Future<List<Map<String,dynamic>>?> getData() async {
+    try {
       final db = await DatabaseHelper.db();
       return db.query('Student');
+    }catch(error){
+      print(error);
+    }
+    return null ;
   }
 
   static Future<void> updateItem( {required int id,required String name,required String dob,required String email,required int mobile})async{

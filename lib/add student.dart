@@ -14,6 +14,7 @@ class _AddStudentState extends State<AddStudent> {
   final TextEditingController dobcontroller = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController mobilecontroller = TextEditingController();
+  // List<Map<String, dynamic>> myData = [];
 
   Future<void> addItem() async {
       await DatabaseHelper.insert(
@@ -22,7 +23,23 @@ class _AddStudentState extends State<AddStudent> {
           dob: dobcontroller.text,
           email: emailcontroller.text,
           mobile:int.parse( mobilecontroller.text));
+      // _refreshJournals();
   }
+  // bool _isLoading = true;
+  //
+  // void _refreshJournals() async {
+  //   final data = await DatabaseHelper.getData();
+  //   setState(() {
+  //     myData = data!;
+  //     _isLoading = false;
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _refreshJournals();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +130,6 @@ class _AddStudentState extends State<AddStudent> {
                     child: Text('Add Detail'),
                       onPressed: (){
                         addItem();
-                        DatabaseHelper.getData();
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('New Student Add')));

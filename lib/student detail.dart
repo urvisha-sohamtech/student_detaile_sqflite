@@ -8,7 +8,9 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-   final myData = [];
+
+   List<Map<String, dynamic>> myData = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,14 @@ class _HomepageState extends State<Homepage> {
               color: Colors.teal,
               margin: EdgeInsets.all(15),
               child: ListTile(
-                  title: Text(myData[index]['id']),
-                subtitle: Text(myData[index]['name']),
+                  title: Text(myData[index]['name']),
+                subtitle: Text(myData[index]['dob']),
                 textColor: Colors.black,
               ),
             );
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context)=>AddStudent()));
         },

@@ -12,7 +12,7 @@ Student({required this.id,required this.name,required this.dob,required this.ema
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        color: Colors.white,
+        color: Colors.teal,
         height: 150,
         width: double.infinity,
         padding: EdgeInsets.only(top: 10,bottom:10,left: 20,right: 10),
