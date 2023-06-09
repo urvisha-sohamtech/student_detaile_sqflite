@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -27,7 +26,7 @@ class DatabaseHelper {
         """);
     }
 
-  static Future<void> insert({required int id,required String  name,required String dob,required String email,required int mobile})async{
+  static Future<void> insert( id,name, dob, email, mobile)async{
     try {
       final db = await DatabaseHelper.db();
       final data = {'id': id, 'name': name, 'dob': dob, 'email': email, 'mobile': mobile};
@@ -37,17 +36,12 @@ class DatabaseHelper {
     }
   }
 
-  static Future<List<Map<String,dynamic>>?> getData() async {
-    try {
+  static Future<List<Map<String,dynamic>>> getData() async {
       final db = await DatabaseHelper.db();
       return db.query('Student');
-    }catch(error){
-      print(error);
-    }
-    return null ;
   }
 
-  static Future<void> updateItem( {required int id,required String name,required String dob,required String email,required int mobile})async{
+  static Future<void> updateItem( id, name, dob,email, mobile)async{
       final db = await DatabaseHelper.db();
       final data = {'id': id, 'name': name, 'dob': dob, 'email': email, 'mobile': mobile,};
       db.update('Student', data, where: "id = ?", whereArgs: [id]);
