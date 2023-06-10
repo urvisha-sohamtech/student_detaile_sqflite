@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:student_detaile_sqflite/details.dart';
+import 'package:student_detaile_sqflite/student%20list.dart';
 import 'database.dart';
 
 class Homepage extends StatefulWidget {
@@ -186,6 +188,9 @@ class _HomepageState extends State<Homepage> {
                     title: Text(myData[index]['name'],style: TextStyle(fontSize: 20)),
                   subtitle: Text(myData[index]['dob']),
                   textColor: Colors.white,
+                  onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDetails(student: Student(id: 'id', name: 'name', dob: 'dob', email: 'email', mobile: 'mobile'),)));
+                  },
                 ),
               ),
             );
