@@ -69,10 +69,7 @@ class _HomepageState extends State<Homepage> {
       isScrollControlled: true,
       builder: (_) =>
           Container(
-            padding: EdgeInsets.only(top: 15, left: 15, bottom: MediaQuery
-                .of(context)
-                .viewInsets
-                .bottom + 50, right: 15),
+            padding: EdgeInsets.only(top: 15, left: 15, bottom: MediaQuery.of(context).viewInsets.bottom + 50, right: 15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               // crossAxisAlignment: CrossAxisAlignment.end,
@@ -194,13 +191,16 @@ class _HomepageState extends State<Homepage> {
                 margin: EdgeInsets.all(10),
                 elevation: 7,
                 child: ListTile(
-                  title: Text(myData[index]['name'], style: TextStyle(fontSize: 20)),
-                  subtitle: Text(myData[index]['dob']),
+                  title: Text(myData[index]['id'].toString(), style: TextStyle(fontSize: 20)),
+                  subtitle: Text( 'Name:' + myData[index]['name'] +
+                       ',  Dob:' + myData[index]['dob'] +
+                       ',  Email:' +myData[index]['email'] +
+                       ',  Mobile:' +myData[index]['mobile'].toString()),
                   textColor: Colors.white,
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) =>
-                            StudentDetails(student: Student(id: 'id', name: namecontroller.text, dob: dobcontroller.text, email: emailcontroller.text, mobile: mobilecontroller.text),)));
+                             Detail(student: Student(id: idcontroller.text.toString(), name:namecontroller.text, dob:dobcontroller.text, email: emailcontroller.text, mobile: mobilecontroller.text))));
                   },
                 ),
               ),
