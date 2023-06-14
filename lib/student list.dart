@@ -8,13 +8,6 @@ Student({required this.id,required this.name,required this.dob,required this.ema
   final String email;
   final String mobile;
 
-  // String get student_id => id;
-  // String get student_name => name;
-  // String get student_dob => dob;
-  // String get student_email => email;
-  // String get student_mobile => mobile;
-
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,36 +20,36 @@ Student({required this.id,required this.name,required this.dob,required this.ema
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '$id',
-              style: TextStyle(
+              id,
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,
               ),
             ),
             Text(
-              '$name',
-              style: TextStyle(
+              name,
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,
               ),
             ),
             Text(
-              '$dob',
-              style: TextStyle(
+              dob,
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,
               ),
             ),
             Text(
-              '$email',
-              style: TextStyle(
+              email,
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,
               ),
             ),
             Text(
-              '$mobile',
-              style: TextStyle(
+              mobile,
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,
               ),

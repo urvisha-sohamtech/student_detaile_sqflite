@@ -21,7 +21,7 @@ class DatabaseHelper {
         name TEXT,
         dob TEXT,
         email TEXT,
-        mobile INTEGER 
+        mobile TEXT 
         ) 
         """);
     }
@@ -45,5 +45,10 @@ class DatabaseHelper {
       final db = await DatabaseHelper.db();
       final data = {'id': id, 'name': name, 'dob': dob, 'email': email, 'mobile': mobile,};
       db.update('Student', data, where: "id = ?", whereArgs: [id]);
+  }
+
+  static Future<void> deleteItem(int id) async{
+    final db = await DatabaseHelper.db();
+    db.delete('Student',where: "id = ?" , whereArgs: [id]);
   }
 }

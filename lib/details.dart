@@ -14,6 +14,10 @@ class Detail extends StatelessWidget {
           title: Text('Student Details'),
           backgroundColor: Colors.black45,
           centerTitle: true,
+          leading:
+            IconButton(
+                onPressed: () {Navigator.pop(context);},
+                icon: Icon(Icons.arrow_back))
         ),
         body: Padding(
           padding: EdgeInsets.all(10),

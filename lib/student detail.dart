@@ -19,7 +19,7 @@ class _HomepageState extends State<Homepage> {
   List<Map<String, dynamic>> myData = [];
   bool _isLoading = true;
 
-  void _refreshData() async {
+  void refreshData() async {
     final data = await DatabaseHelper.getData();
     setState(() {
       myData = data;
@@ -30,7 +30,7 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _refreshData();
+    refreshData();
   }
 
   Future<void> addItem() async {
@@ -40,7 +40,7 @@ class _HomepageState extends State<Homepage> {
         dobcontroller.text,
         emailcontroller.text,
         mobilecontroller.text);
-    _refreshData();
+    refreshData();
   }
 
   Future<void> updateItem() async {
@@ -50,6 +50,13 @@ class _HomepageState extends State<Homepage> {
         dobcontroller.text,
         emailcontroller.text,
         mobilecontroller.text);
+    refreshData();
+  }
+
+  void deleteItem(int id) async{
+    await DatabaseHelper.deleteItem(id);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('deleted')));
+    refreshData();
   }
 
   void showform(int? id) async {
@@ -160,7 +167,7 @@ class _HomepageState extends State<Homepage> {
                         mobilecontroller.text = '';
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('New Student Add')));
+                            SnackBar(content: Text(id == null? 'New Student Add' : ' update data')));
                       },
                     ),
                   ],
@@ -183,9 +190,11 @@ class _HomepageState extends State<Homepage> {
             return Dismissible(
               key: UniqueKey(),
               background: Container(child: IconButton(
-                  onPressed: () => showform(myData[index]['name']),
+                  onPressed: () => showform(myData[index]['id']),
                   icon: Icon(Icons.edit))),
-              secondaryBackground: Container(child: Icon(Icons.delete,)),
+              secondaryBackground: Container(child: IconButton(
+                  onPressed: () => deleteItem(myData[index]['id']),
+                  icon: Icon(Icons.delete))),
               child: Card(
                 color: Colors.teal,
                 margin: EdgeInsets.all(10),
@@ -195,8 +204,9 @@ class _HomepageState extends State<Homepage> {
                   subtitle: Text( 'Name:' + myData[index]['name'] +
                        ',  Dob:' + myData[index]['dob'] +
                        ',  Email:' +myData[index]['email'] +
-                       ',  Mobile:' +myData[index]['mobile'].toString()),
+                       ',  Mobile:' +myData[index]['mobile']),
                   textColor: Colors.white,
+                  trailing: IconButton(onPressed: () => showform(myData[index]['id']) , icon: Icon(Icons.edit)),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) =>
