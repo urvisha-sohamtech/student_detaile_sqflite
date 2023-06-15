@@ -21,19 +21,15 @@ class DatabaseHelper {
         name TEXT,
         dob TEXT,
         email TEXT,
-        mobile TEXT 
+        mobile INTEGER 
         ) 
         """);
     }
 
   static Future<void> insert( id,name, dob, email, mobile)async{
-    try {
       final db = await DatabaseHelper.db();
       final data = {'id': id, 'name': name, 'dob': dob, 'email': email, 'mobile': mobile};
       db.insert('Student', data, conflictAlgorithm: ConflictAlgorithm.replace);
-    }catch(error){
-      print(error);
-    }
   }
 
   static Future<List<Map<String,dynamic>>> getData() async {

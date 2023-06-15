@@ -63,11 +63,11 @@ class _HomepageState extends State<Homepage> {
     if (id != null) {
       final existingdata =
       myData.firstWhere((element) => element['id'] == id);
-      idcontroller.text = existingdata['id'];
+      idcontroller.text = existingdata['id'].toString();
       namecontroller.text = existingdata['name'];
       dobcontroller.text = existingdata['dob'];
       emailcontroller.text = existingdata['email'];
-      mobilecontroller.text = existingdata['mobile'];
+      mobilecontroller.text = existingdata['mobile'].toString();
     }
 
     showModalBottomSheet(
@@ -189,28 +189,29 @@ class _HomepageState extends State<Homepage> {
           itemBuilder: (context, index) {
             return Dismissible(
               key: UniqueKey(),
-              background: Container(child: IconButton(
-                  onPressed: () => showform(myData[index]['id']),
-                  icon: Icon(Icons.edit))),
-              secondaryBackground: Container(child: IconButton(
-                  onPressed: () => deleteItem(myData[index]['id']),
-                  icon: Icon(Icons.delete))),
+              background: Container(child:Icon(Icons.edit)),
+              secondaryBackground: Container(child: Icon(Icons.delete)),
+              confirmDismiss: (direction) async {
+                if(direction == DismissDirection.startToEnd){
+                  showform(myData[index]['id']);
+                }else{
+                  if(direction ==  DismissDirection.endToStart){
+                    deleteItem(myData[index]['id']);
+                  }
+                }
+              },
               child: Card(
-                color: Colors.teal,
+                color: Colors.black54,
                 margin: EdgeInsets.all(10),
-                elevation: 7,
+                elevation: 5,
                 child: ListTile(
-                  title: Text(myData[index]['id'].toString(), style: TextStyle(fontSize: 20)),
-                  subtitle: Text( 'Name:' + myData[index]['name'] +
-                       ',  Dob:' + myData[index]['dob'] +
-                       ',  Email:' +myData[index]['email'] +
-                       ',  Mobile:' +myData[index]['mobile']),
+                  title: Text('Id: ' + myData[index]['id'].toString(),),
+                  subtitle: Text( 'Name: ' + myData[index]['name'] ),
                   textColor: Colors.white,
-                  trailing: IconButton(onPressed: () => showform(myData[index]['id']) , icon: Icon(Icons.edit)),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) =>
-                             Detail(student: Student(id: idcontroller.text.toString(), name:namecontroller.text, dob:dobcontroller.text, email: emailcontroller.text, mobile: mobilecontroller.text))));
+                             Detail(student: Student(id: myData[index]['id'].toString(), name:myData[index]['name'], dob:myData[index]['dob'], email: myData[index]['email'], mobile: myData[index]['mobile'].toString()))));
                   },
                 ),
               ),
