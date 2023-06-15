@@ -211,7 +211,7 @@ class _HomepageState extends State<Homepage> {
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) =>
-                             Detail(student: Student(id: myData[index]['id'].toString(), name:myData[index]['name'], dob:myData[index]['dob'], email: myData[index]['email'], mobile: myData[index]['mobile'].toString()))));
+                             Detail(student: Student(id: myData[index]['id'], name:myData[index]['name'], dob:myData[index]['dob'], email: myData[index]['email'], mobile: myData[index]['mobile'].toString()))));
                   },
                 ),
               ),

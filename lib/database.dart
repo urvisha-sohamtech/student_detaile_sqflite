@@ -1,10 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
 
   static Future<Database> db()async{
-      // var dbpath = getDatabasesPath();
-      // debugPrint(dbpath.toString());
       return openDatabase(
         'flutter.db',
         version: 1,

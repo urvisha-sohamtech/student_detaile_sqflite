@@ -33,7 +33,7 @@ class Detail extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(5),
                 ),
-                Text(student.id),
+                Text(student.id.toString()),
                 Padding(padding: EdgeInsets.all(5),
                 ),
                 const Text('name',

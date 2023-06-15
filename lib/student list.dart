@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Student extends StatelessWidget {
 Student({required this.id,required this.name,required this.dob,required this.email,required this.mobile});
-   final String id;
+   final int id;
   final String name;
   final String dob;
   final String email;
@@ -20,7 +20,7 @@ Student({required this.id,required this.name,required this.dob,required this.ema
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              id,
+              '$id',
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,
