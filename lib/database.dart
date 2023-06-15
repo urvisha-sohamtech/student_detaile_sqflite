@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -12,7 +11,6 @@ class DatabaseHelper {
         },
       );
   }
-  // debugPrint('====> ERROR : ${error.toString()}');
 
   static Future<void> createTable(database) async {
       database.execute("""CREATE TABLE Student(

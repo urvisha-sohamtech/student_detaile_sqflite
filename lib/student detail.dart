@@ -17,13 +17,11 @@ class _HomepageState extends State<Homepage> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController mobilecontroller = TextEditingController();
   List<Map<String, dynamic>> myData = [];
-  bool _isLoading = true;
 
   void refreshData() async {
     final data = await DatabaseHelper.getData();
     setState(() {
       myData = data;
-      _isLoading = false;
     });
   }
 
@@ -55,11 +53,15 @@ class _HomepageState extends State<Homepage> {
 
   void deleteItem(int id) async{
     await DatabaseHelper.deleteItem(id);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('deleted')));
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content:
+        Text(' Successful Deleted!'),
+        ),
+    );
     refreshData();
   }
 
-  void showform(int? id) async {
+  void Showform(int? id) async {
     if (id != null) {
       final existingdata =
       myData.firstWhere((element) => element['id'] == id);
@@ -76,10 +78,10 @@ class _HomepageState extends State<Homepage> {
       isScrollControlled: true,
       builder: (_) =>
           Container(
-            padding: EdgeInsets.only(top: 15, left: 15, bottom: MediaQuery.of(context).viewInsets.bottom + 50, right: 15),
+            padding: EdgeInsets.only(
+                top: 15, left: 15, bottom: MediaQuery.of(context).viewInsets.bottom + 50, right: 15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const Text(
                   'Add Details',
@@ -148,7 +150,6 @@ class _HomepageState extends State<Homepage> {
                   height: 20,
                 ),
                 Row(
-                  // crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(
@@ -167,61 +168,77 @@ class _HomepageState extends State<Homepage> {
                         mobilecontroller.text = '';
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(id == null? 'New Student Add' : ' update data')));
+                            SnackBar(content: Text(id == null? 'New Student Add' : ' Update Successfully')));
                       },
                     ),
                   ],
                 ),
               ],
             ),
-          ),);
+          ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Student detail'),
+      appBar: AppBar(
+        title: Text(
+            'Student detail'
+        ),
         backgroundColor: Colors.black45,
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemCount: myData.length,
-          itemBuilder: (context, index) {
-            return Dismissible(
-              key: UniqueKey(),
-              background: Container(child:Icon(Icons.edit)),
-              secondaryBackground: Container(child: Icon(Icons.delete)),
-              confirmDismiss: (direction) async {
-                if(direction == DismissDirection.startToEnd){
-                  showform(myData[index]['id']);
-                }else{
-                  if(direction ==  DismissDirection.endToStart){
-                    deleteItem(myData[index]['id']);
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: ListView.builder(
+            itemCount: myData.length,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                key: UniqueKey(),
+                background: Icon(Icons.edit),
+                secondaryBackground: Icon(Icons.delete),
+                confirmDismiss: (direction) async {
+                  if(direction == DismissDirection.startToEnd){
+                    Showform(myData[index]['id']);
+                  }else{
+                    if(direction ==  DismissDirection.endToStart){
+                      deleteItem(myData[index]['id']);
+                    }
                   }
-                }
-              },
-              child: Card(
-                color: Colors.black54,
-                margin: EdgeInsets.all(10),
-                elevation: 5,
-                child: ListTile(
-                  title: Text('Id: ' + myData[index]['id'].toString(),),
-                  subtitle: Text( 'Name: ' + myData[index]['name'] ),
-                  textColor: Colors.white,
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) =>
-                             Detail(student: Student(id: myData[index]['id'], name:myData[index]['name'], dob:myData[index]['dob'], email: myData[index]['email'], mobile: myData[index]['mobile'].toString()))));
-                  },
+                },
+                child: Card(
+                  color: Colors.black54,
+                  margin: EdgeInsets.all(10),
+                  elevation: 5,
+                  child: ListTile(
+                    title: Text('Id: ' + myData[index]['id'].toString(),),
+                    subtitle: Text( 'Name: ' + myData[index]['name'] ),
+                    textColor: Colors.white,
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) =>
+                               Detail(student: Student(
+                                   id: myData[index]['id'],
+                                   name:myData[index]['name'],
+                                   dob:myData[index]['dob'],
+                                   email: myData[index]['email'],
+                                   mobile: myData[index]['mobile'],
+                               ),
+                               ),
+                      ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showform(null),
-        // {Navigator.push(context, MaterialPageRoute(builder: (context) =>  AddStudent()));},
-        child: Icon(Icons.add,),
+        onPressed: () => Showform(null),
         backgroundColor: Colors.black,
+        child: Icon(Icons.add,),
       ),
     );
   }

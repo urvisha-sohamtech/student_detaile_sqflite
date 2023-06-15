@@ -16,7 +16,9 @@ class Detail extends StatelessWidget {
           centerTitle: true,
           leading:
             IconButton(
-                onPressed: () {Navigator.pop(context);},
+                onPressed: () {
+                  Navigator.pop(context);
+                  },
                 icon: Icon(Icons.arrow_back))
         ),
         body: Padding(
@@ -31,10 +33,10 @@ class Detail extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(2),
                 ),
                 Text(student.id.toString()),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(5),
                 ),
                 const Text('name',
                   style: TextStyle(
@@ -42,10 +44,10 @@ class Detail extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(2),
                 ),
                 Text(student.name),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(5),
                 ),
                 const Text('dob',
                   style: TextStyle(
@@ -53,10 +55,10 @@ class Detail extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(2),
                 ),
                 Text(student.dob),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(5),
                 ),
                 const Text('email',
                   style: TextStyle(
@@ -64,10 +66,10 @@ class Detail extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(2),
                 ),
                 Text(student.email),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(5),
                 ),
                 const Text('mobile',
                   style: TextStyle(
@@ -75,10 +77,10 @@ class Detail extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(2),
                 ),
                 Text(student.mobile),
-                Padding(padding: EdgeInsets.all(5),
+                const Padding(padding: EdgeInsets.all(5),
                 ),
               ],
             ),
