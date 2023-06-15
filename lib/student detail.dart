@@ -223,7 +223,7 @@ class _HomepageState extends State<Homepage> {
                                    name:myData[index]['name'],
                                    dob:myData[index]['dob'],
                                    email: myData[index]['email'],
-                                   mobile: myData[index]['mobile'],
+                                   mobile: myData[index]['mobile'].toString(),
                                ),
                                ),
                       ),
