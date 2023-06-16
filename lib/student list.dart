@@ -6,7 +6,7 @@ Student({required this.id,required this.name,required this.dob,required this.ema
   final String name;
   final String dob;
   final String email;
-  final String mobile;
+  final int mobile;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ Student({required this.id,required this.name,required this.dob,required this.ema
               ),
             ),
             Text(
-              mobile,
+              '$mobile',
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.black,

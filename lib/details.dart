@@ -79,7 +79,7 @@ class Detail extends StatelessWidget {
                 ),
                 const Padding(padding: EdgeInsets.all(2),
                 ),
-                Text(student.mobile),
+                Text(student.mobile.toString()),
                 const Padding(padding: EdgeInsets.all(5),
                 ),
               ],
